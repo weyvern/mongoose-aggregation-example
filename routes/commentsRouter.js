@@ -4,6 +4,6 @@ import { getAll, create } from '../controllers/comments.js';
 const commentsRouter = express.Router();
 
 commentsRouter.get('/', getAll);
-commentsRouter.post('/', create);
+commentsRouter.post('/:id', create);
 
 export default commentsRouter;

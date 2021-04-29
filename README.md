@@ -18,7 +18,6 @@ npm install
 Create a .env file with:
 
 - MONGO_URI variable, it has to be a valid MongoDB connection string.
-- JWT_SECRET
 
 # Commands
 
@@ -40,24 +39,18 @@ npm start
 
 ## Features
 
-- [x] Set up MongoDB
-- [x] Create my User model with Mongoose
-- [x] Create a new user -> POST /signup (returns token) + hashed password
-- [x] Login -> /signin (returns token)
-- [x] Get user info -> /me (returns user info if authenticated)
+- [x] Create/read locations
+- [x] Create commments and calculate rating in location collection (you can check get the location after to check it out😉)
 
 # API routes and methods
 
-- POST /auth/signup
+- POST /locations
 
 -- Sample request:
 
 ```json
 {
-  "name": String,
-  "email": String,
-  "password": String,
-  "address": String
+  "name": String
 }
 ```
 
@@ -65,18 +58,55 @@ npm start
 
 ```json
 {
-  "token": String
+  "comments_list": [],
+  "_id": "608ae4842d23290cc3bc6258",
+  "name": "Tofucream",
+  "__v": 0
 }
 ```
 
-- POST /auth/signin
+- GET /locations
+
+-- Sample response:
+
+```json
+[
+  {
+    "comments_list": [],
+    "_id": "608ae4842d23290cc3bc6257",
+    "name": "Happy Soja Beans",
+    "__v": 0
+  },
+  {
+    "comments_list": [],
+    "_id": "608ae4842d23290cc3bc6258",
+    "name": "Tofucream",
+    "__v": 0
+  }
+]
+```
+
+- GET /locations/:id
+
+-- Sample response:
+
+```json
+{
+  "comments_list": [],
+  "_id": "608ae4842d23290cc3bc6257",
+  "name": "Happy Soja Beans",
+  "__v": 0
+}
+```
+
+- POST /comments/:location_id
 
 -- Sample request:
 
 ```json
 {
-  "email": String,
-  "password": String
+  "text": "Best icecream ever!!!!",
+  "rating": 10
 }
 ```
 
@@ -84,28 +114,11 @@ npm start
 
 ```json
 {
-  "token": String
-}
-```
-
-- GET /auth/me (send token in request header as **token**)
-
--- Sample response:
-
-```json
-{
-  "name": String,
-  "email": String,
-  "address": String
-}
-```
-
-- GET /auth/verify-session (send token in request header as **token**)
-
--- Sample response:
-
-```json
-{
-  "success": "Valid token"
+  "_id": "608ae4e02d23290cc3bc625d",
+  "location_id": "608ae4842d23290cc3bc6258",
+  "text": "Best icecream ever!!!!",
+  "rating": 10,
+  "date": "2021-04-29T16:54:56.414Z",
+  "__v": 0
 }
 ```
