@@ -35,12 +35,11 @@ commentSchema.statics.getAverageGrade = async function (location_id) {
 };
 
 commentSchema.post('save', function () {
-  console.log(this);
   Comment.getAverageGrade(this.location_id);
 });
 
 commentSchema.pre('remove', function () {
-  Comment.getAverageGrade(this._id);
+  Comment.getAverageGrade(this.location_id);
 });
 
 export const Location = model('Location', locationSchema);
